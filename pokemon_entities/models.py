@@ -5,10 +5,16 @@ class Pokemon(models.Model):
     title = models.CharField(max_length=200)
     image = models.ImageField(null=True)
 
-
-class PokemonEntity(models.Model):
-    lat = models.FloatField(null=True)
-    lon = models.FloatField(null=True)
-
     def __str__(self):
         return self.title
+
+
+class PokemonEntity(models.Model):
+    pokemon = models.ForeignKey(
+        Pokemon,
+        on_delete=models.CASCADE,
+        verbose_name="Pokemon",
+        related_name="entities",
+    )
+    lat = models.FloatField(null=True)
+    lon = models.FloatField(null=True)
